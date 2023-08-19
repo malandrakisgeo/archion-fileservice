@@ -1,8 +1,8 @@
 
-# Kurz gesagt
+# Archion fileservice
 
 A buddy running a small company once asked me to build a microservice that would enable his customers manage files via his website.
-Hence the dropwizard-based Archion-microservice was born.
+Hence the dropwizard-based Archion-fileservice was born.
 
 The users' files are stored on a cloud service in the long term (AWS here), and on a local machine in the short term for faster retrieval.
 
@@ -19,11 +19,8 @@ Another scheduled function removes from the local machine all files that have no
 
 
 
-## IMPORTANT NOTES:
-1. The version here includes no real authentication/authorization.
-2. The requests are not being sent directly by the user, but by another application. Hence that all necessary debug messages
-   are written in the requests.
-
+## IMPORTANT NOTE:
+The version here includes only sample authentication/authorization
 
 =======================================
 
@@ -38,31 +35,6 @@ It has been tested and runs fine with Oracle JDK 11.0.9
 =======================================
 
 ## DETAILS
-
-# ArchionRequest & ArchionResponse
-The ArchionRequest is sent by another  application when the latter intends to store, retrieve, or remove a file.
-
-Archion treats the ArchionResponse as an entity dependent on an ArchionRequest, and  thereby one of its' fields.
-
-Unlike other applications implementing a Resource/Service/Model/DAO-like pattern, the Response-object
-to be returned (ArchionResponse in our case) is not created after all functionalities complete, but already
-exists in advance and is constantly updated (at least the updatedFileMetadata field) while the code runs.
-
-The ArchionResponse contains the updated fileMetadata, if everything went well, otherwise it contains a nulled
-file Metadata field and details about the problem, as well as the last instance of saved fileMetadata in the DB
-as a debug message. There was the consideration of adding a debugFileMetadata field in ArchionResponse
-yet as of 3/2022 it doesn't seem to be of any use to the caller application and a String for debug
-purposes seems enough. Still it could be a good idea for anyone who may want to adjust and use the project
-for one's own needs.
-
-# Exceptions
-Throwing exceptions is a bad strategy. But it is practical when there are several files
-
-
-# Authentication
-    The original Archion includes a form of Authentication for the caller application. The code here
-    assumes that the caller application has a total control over the files.
-
 
 # Files
     There are four categories (or scopes) of files: normal, temporary, archive, and test.
@@ -109,11 +81,3 @@ Throwing exceptions is a bad strategy. But it is practical when there are severa
     At least for now.
 
     There is the consideration of switching to jOOQ, but it is far from certain.
-
-
-
-
-
-
-
-
