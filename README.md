@@ -19,12 +19,12 @@ Another scheduled function removes from the local machine all files that have no
 
 
 
-## IMPORTANT NOTE:
+### IMPORTANT NOTE:
 The version here includes only sample authentication/authorization
 
 =======================================
 
-# Running via IntelliJ:
+### Running via IntelliJ:
 All you need is a configuration pointing the ArchionApplication class as an entry, and "server config.yml" in the CLI arguments.
 
 One ought to fill the config.yml with one's preferred values.
@@ -34,9 +34,9 @@ It has been tested and runs fine with Oracle JDK 11.0.9
 
 =======================================
 
-# DETAILS
+## DETAILS
 
-## Files
+### Files
     There are four categories (or scopes) of files: normal, temporary, archive, and test.
     The same procedures are applied to all of them, and only the time of deletion varies accordingly.
 
@@ -54,7 +54,7 @@ It has been tested and runs fine with Oracle JDK 11.0.9
         (NOTE: In the current implementation, there are not database entries with CLOUD_SERVICE_REMOVED)
 
 
-## Scheduled tasks
+### Scheduled tasks
     Since Dropwizard provides no native support for quartz, we rely on the
     external library dropwizard-jobs-core.
 
@@ -72,7 +72,7 @@ It has been tested and runs fine with Oracle JDK 11.0.9
     3 runs once a minute.
 
 
-## Database
+### Database
     The project relies on a postgres-db currently having a single table.
 
     Given the simplicity of the db, a plain jdbc connection with hard-coded queries is used
