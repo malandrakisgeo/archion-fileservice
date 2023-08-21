@@ -106,10 +106,10 @@ public class FileService {
             cloudHandler.uploadFile(fileMetadata, fileinputStream);
 
         } catch (FileException e) {
+            fileMetadata.setSha1Hash(null); //Otherwise the user will not be able to re-create the file (FileExistsException)
             throw e;
         } finally {
             fileMetadata.setLastmodified(new Timestamp(System.currentTimeMillis()));//The metadata was modified in the storeFile() function.
-            fileMetadata.setSha1Hash(null); //Otherwise the user will not be able to re-create the file (FileExistsException)
             fileDao.update(fileMetadata);
         }
         return fileMetadata;
