@@ -64,11 +64,11 @@ public class ScheduledTaskService {
 
         try {
             if (tempFileMetadata.getPhase() == FileProcedurePhase.LOCAL_MACHINE_STORED || tempFileMetadata.getPhase() == FileProcedurePhase.CLOUD_SERVICE_STORED) {
-                tempFileMetadata = localMachineHandler.deleteFileFromLocalMachine(file);
+                tempFileMetadata = localMachineHandler.deleteFileFromLocalMachine(tempFileMetadata);
             }
 
             if (tempFileMetadata.getPhase() == FileProcedurePhase.LOCAL_MACHINE_REMOVED || tempFileMetadata.getPhase() == FileProcedurePhase.CLOUD_SERVICE_STORED) { //If successfully removed or already removed from the machine in the first place
-                tempFileMetadata = cloudHandler.removeFileFromCloudService(file);
+                tempFileMetadata = cloudHandler.removeFileFromCloudService(tempFileMetadata);
             }
         } catch (Exception e) {
             try {
@@ -78,7 +78,7 @@ public class ScheduledTaskService {
             }
             throw e;
         }
-        fileDAO.deleteFileById(file.getFileid());
+        fileDAO.deleteFileById(tempFileMetadata.getFileid());
 
     }
 }
